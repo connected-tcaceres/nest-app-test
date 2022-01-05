@@ -50,6 +50,7 @@ export class StudentService {
     });
 
     this.students = updatedStudentList;
+    console.log('this students:', this.students);
     return updatedStudent;
   }
 }
