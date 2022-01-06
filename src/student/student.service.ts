@@ -50,7 +50,34 @@ export class StudentService {
     });
 
     this.students = updatedStudentList;
-    console.log('this students:', this.students);
+    return updatedStudent;
+  }
+
+  getStudentsByTeacherId(teacherId: string): FindStudentResponseDto[] {
+    return this.students.filter((student) => {
+      return student.teacher === teacherId;
+    });
+  }
+
+  updateStudentTeacher(
+    teacherId: string,
+    studentId: string,
+  ): StudentResponseDto {
+    let updatedStudent: StudentResponseDto;
+
+    const updatedStudentList = this.students.map((student) => {
+      if (student.id === studentId) {
+        updatedStudent = {
+          ...student,
+          teacher: teacherId,
+        };
+        return updatedStudent;
+      } else {
+        return student;
+      }
+    });
+
+    this.students = updatedStudentList;
     return updatedStudent;
   }
 }
